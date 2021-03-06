@@ -12,7 +12,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: goes-nginx
+    container_name: android-courses-nginx
     ports:
       - 40200:80
     volumes:

@@ -36,6 +36,7 @@ COPY . /var/www
 
 RUN chown -R www-data:www-data \
         /var/www/storage \
-        /var/www/bootstrap/cache \
-        composer install --no-interaction \
-        php artisan config:cache;
+        /var/www/bootstrap/cache
+
+RUN composer install --no-interaction;
+RUN php artisan config:cache;
