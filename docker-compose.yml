@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+  laravel:
+    container_name: android-courses-backend
+    build:
+      context: .
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - mysql
+
+  nginx:
+    image: nginx:alpine
+    container_name: goes-nginx
+    ports:
+      - 40200:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    depends_on:
+      - laravel
+
+  mysql:
+    image: mysql:5.7.33
+    container_name: android-courses-database
+    restart: unless-stopped
+    ports:
+      - 40201:3306
+    volumes:
+      - android_courses_db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: android-courses-phpmyadmin
+    ports:
+      - 40202:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=300M
+    depends_on:
+      - mysql
+
+volumes:
+  android_courses_db:
