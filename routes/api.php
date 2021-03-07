@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ItemsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/items/import', [ItemsController::class, 'import']);
-Route::post('/items/import', [ItemsController::class, 'import']);
 
 Route::middleware('auth:api')->get('/items', [ItemsController::class, 'index']);
+Route::middleware('auth:api')->get('/users', [UserController::class, 'index']);
+Route::middleware('auth:api')->post('/users/avatar', [UserController::class, 'avatar']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
