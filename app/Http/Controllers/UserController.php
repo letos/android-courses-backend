@@ -15,4 +15,11 @@ class UserController extends Controller
         $user = User::find(Auth::id());
         return $user->toJson();
     }
+
+    public function avatar(Request $request)
+    {
+        $user = User::find(Auth::id());
+        $user->avatar = $request->get('avatar_url');
+        $user->save();
+    }
 }
