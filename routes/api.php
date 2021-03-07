@@ -16,12 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/items/import', [ItemsController::class, 'import']);
 
-Route::middleware('auth:api')->get('/items', [ItemsController::class, 'index']);
-Route::middleware('auth:api')->get('/users', [UserController::class, 'index']);
-Route::middleware('auth:api')->post('/users/avatar', [UserController::class, 'avatar']);
+Route::middleware('auth:api')->group(function () {
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::get('/items', [ItemsController::class, 'index']);
+    Route::post('/items/import', [ItemsController::class, 'import']);
+
+    Route::get('/users', [UserController::class, 'index']);
+    Route::post('/users/avatar', [UserController::class, 'avatar']);
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
 });
