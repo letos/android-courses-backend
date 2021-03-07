@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/items', [ItemsController::class, 'import']);
+Route::post('/items/import', [ItemsController::class, 'import']);
+Route::post('/items/import', [ItemsController::class, 'import']);
+
+Route::middleware('auth:api')->get('/items', [ItemsController::class, 'index']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
