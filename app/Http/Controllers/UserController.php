@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = User::find(Auth::id());
-        return $user->toJson();
+        return $user->toJson(JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
     }
 
     public function avatar(Request $request)
