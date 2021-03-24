@@ -17,6 +17,7 @@ class CreateFavoriteItemsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId("items_id")->constrained('items');
+            $table->timestamps();
         });
     }
 
