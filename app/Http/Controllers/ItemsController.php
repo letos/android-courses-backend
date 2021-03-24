@@ -26,6 +26,6 @@ class ItemsController extends Controller
     public function index(Request $request)
     {
         $items = Item::all();
-        return $items->toJson(JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        return $items->toJson(JSON_UNESCAPED_SLASHES);
     }
 }
