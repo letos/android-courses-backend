@@ -15,8 +15,28 @@ class Item extends Model
         return $this->belongsToMany(User::class, 'favorite_items');
     }
 
+    public function ratedUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'rating_items');
+    }
+
     public function hasFavoriteUser($userId): bool
     {
         return $this->users()->where('users.id', $userId)->exists();
+    }
+
+    public function rating(): int
+    {
+        return $this->ratedUsers()->sum('value');
+    }
+
+    public function userLiked($userId): bool
+    {
+        return $this->ratedUsers()->where('users.id', $userId)->where('value', 1)->exists();
+    }
+
+    public function userDisliked($userId): bool
+    {
+        return $this->ratedUsers()->where('users.id', $userId)->where('value', -1)->exists();
     }
 }
