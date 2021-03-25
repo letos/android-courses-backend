@@ -16,13 +16,17 @@ class ItemResource extends JsonResource
      */
     public function toArray($request)
     {
+        $userId = Auth::id();
         return [
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
             'image_url' => $this->image_url,
             'created_at' => $this->created_at,
-            'is_favorite' => $this->hasFavoriteUser(Auth::id())
+            'is_favorite' => $this->hasFavoriteUser($userId),
+            'rating' => $this->rating(),
+            'liked' => $this->userLiked($userId),
+            'disliked' => $this->userDisliked($userId)
         ];
     }
 }
