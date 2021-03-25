@@ -15,7 +15,7 @@ class FavoriteController extends Controller
         $favorite->user_id = Auth::id();
         $favorite->item_id = $itemId;
         $favorite->save();
-        return response(200);
+        return response()->noContent(200);
     }
 
     public function delete($itemId)
@@ -23,6 +23,6 @@ class FavoriteController extends Controller
         FavoriteItem::where('user_id', Auth::id())
             ->where('item_id', $itemId)
             ->delete();
-        return response(200);
+        return response()->noContent(200);
     }
 }
