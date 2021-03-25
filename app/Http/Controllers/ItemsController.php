@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Resources\ItemResource;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,6 @@ class ItemsController extends Controller
     public function index(Request $request)
     {
         $items = Item::all();
-        return $items->toJson(JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        return ItemResource::collection($items);
     }
 }
