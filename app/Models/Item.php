@@ -39,4 +39,14 @@ class Item extends Model
     {
         return $this->ratedUsers()->where('users.id', $userId)->where('value', -1)->exists();
     }
+
+    public function userRating($userId): int
+    {
+        $rating = RatingItem::where('user_id', $userId)->where('item_id', $this->id)->first();
+        if ($rating != null) {
+            return $rating->value;
+        } else {
+            return 0;
+        }
+    }
 }

@@ -25,8 +25,7 @@ class ItemResource extends JsonResource
             'created_at' => $this->created_at,
             'is_favorite' => $this->hasFavoriteUser($userId),
             'rating' => $this->rating(),
-            'liked' => $this->userLiked($userId),
-            'disliked' => $this->userDisliked($userId)
+            'your_rating' => $this->userRating($userId)
         ];
     }
 }
